@@ -113,11 +113,10 @@ def fspatch(fsfile, filename, dirpath):  # 接收两个字典对比
                 mode = '0644'
                 config = [uid, gid, mode]
             newfs.update({i: config})
-            if VERBOSE:
-                if len(config) < 4:
-                    print("Add file [%s] fs_config: uid[%s] gid[%s] mode[%s]" %(i,config[0],config[1],config[2]))
-                else:
-                    print("Add file [%s] fs_config: uid[%s] gid[%s] mode[%s] extra[%s]" %(i,config[0],config[1],config[2],config[3]))
+            if len(config) < 4:
+                print("Add file [%s] fs_config: uid[%s] gid[%s] mode[%s]" %(i,config[0],config[1],config[2]))
+            else:
+                print("Add file [%s] fs_config: uid[%s] gid[%s] mode[%s] extra[%s]" %(i,config[0],config[1],config[2],config[3]))
     return newfs
         
 def writetofile(file, newfsconfig):
@@ -145,8 +144,6 @@ def Usage():
 
 if __name__ == '__main__':
     import sys
-    global VERBOSE
-    VERBOSE = False
     if len(sys.argv) < 3:
         Usage()
         sys.exit()
